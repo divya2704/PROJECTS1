@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>setTimeout & setInterval Demo</title>
+  <style>
+    body {
+      margin: 0;
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    #startBtn {
+      background-color: lightgreen;
+      color: white;
+    }
+
+    #stopBtn {
+      background-color: red;
+      color: white;
+    }
+
+    p {
+      font-size: 18px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>TIMER FUNCTION</h2>
+
+    <p id="welcomeMsg">Waiting to show welcome message...</p>
+    <p id="counterMsg">Timer not started.</p>
+
+    <button id="startBtn">Start Counter</button>
+    <button id="stopBtn">Stop Counter</button>
+  </div>
+
+  <script>
+    setTimeout(() => {
+      document.getElementById("welcomeMsg").textContent = "Welcome!";
+    }, 1000);
+
+    let counter = 0;
+    let intervalId = null;
+
+    // Start interval
+    document.getElementById("startBtn").addEventListener("click", () => {
+      if (intervalId === null) {
+        intervalId = setInterval(() => {
+          counter++;
+          document.getElementById("counterMsg").textContent = `Seconds passed: ${counter}`;
+        }, 1000);
+      }
+    });
+
+    document.getElementById("stopBtn").addEventListener("click", () => {
+      if (intervalId !== null) {
+        clearInterval(intervalId);
+        intervalId = null;
+        document.getElementById("counterMsg").textContent += " ⏹ Timer stopped.";
+      }
+    });
+  </script>
+
+</body>
+</html>
